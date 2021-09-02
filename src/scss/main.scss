@@ -1,0 +1,17 @@
+body {
+  background-color: #da8fdd;
+  font-family: Helvetica, sans-serif;
+}
+
+h1 {
+  letter-spacing: 4px;
+  color: black;
+  text-align: center;
+}
+
+canvas {
+  display: block;
+  margin: 20px auto;
+  border: 1px solid rgba(0, 50, 100, 0.4);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+}
