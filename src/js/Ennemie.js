@@ -14,10 +14,22 @@ export default class Ennemie {
     draw(){
         this.game.ctx.beginPath();
 
-        //this.x += 20;
         this.game.ctx.rect(this.x, this.y, this.width, this.height);
         this.game.ctx.fill();
 
         this.game.ctx.closePath();
     }
+    isCollisionned(ball) {
+        if (ball.y > this.y
+            && ball.y - ball.height < this.y + this.height
+            && ball.x > this.x
+            && ball.x < this.x + this.width) {
+
+            ball.speed = -ball.speed;
+            delete this.x;
+            delete this.y;
+        }
+    }
+
+
 }
