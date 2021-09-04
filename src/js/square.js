@@ -21,6 +21,7 @@ const square={
         this.game.ctx.beginPath();
         this.game.ctx.rect(this.x, this.y, this.width, this.height);
         this.game.ctx.fill();
+        this.game.ctx.closePath();
     },
     goRight(){
         if (this.x + this.width > this.game.canvas.width ){
