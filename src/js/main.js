@@ -16,7 +16,9 @@ const game= {
     palierX : 70,
     palierY : 30,
     requestId : 0,
-    pElement : null,
+    p : null,
+    pColor : null,
+    pinkMode : false,
 
     reset(){
 
@@ -43,6 +45,10 @@ const game= {
         this.p.textContent ='appuyez sur la touche espace pour débuter le jeu';
         document.body.appendChild(this.p);
         this.p.style.textAlign = 'center';
+        this.pColor = document.createElement('p');
+        this.pColor.textContent = 'Vous pouvez switcher entre deux couleur en appuyant sur la touche D'
+        this.p.insertAdjacentElement('afterend',this.pColor);
+        this.pColor.style.textAlign = 'center';
         controller.init(this);
 
         square.init(this);
