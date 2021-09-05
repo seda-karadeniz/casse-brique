@@ -16,6 +16,7 @@ const game= {
     palierX : 70,
     palierY : 30,
     requestId : 0,
+    pElement : null,
 
     reset(){
 
@@ -38,7 +39,12 @@ const game= {
     init(){
 
         this.ctx = this.canvas.getContext('2d');
+        this.p = document.createElement('p');
+        this.p.textContent ='appuyez sur la touche espace pour débuter le jeu';
+        document.body.appendChild(this.p);
+        this.p.style.textAlign = 'center';
         controller.init(this);
+
         square.init(this);
 
 
@@ -54,19 +60,24 @@ const game= {
         ball.init(this);
 
         this.animate();
+
     },
     animate(){
         this.requestId = window.requestAnimationFrame(()=>{
             this.animate();
         })
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-        square.update();
+        if (this.hasStarted){
+            this.p.remove();
+            square.update();
 
-        this.ennemies.forEach(ennemie=>{
-            ennemie.update();
+            this.ennemies.forEach(ennemie=>{
+                ennemie.update();
 
-        })
-        ball.update();
+            })
+            ball.update();
+        }
+
 
     },
     cancelAnimation(){
