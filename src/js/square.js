@@ -6,6 +6,8 @@ const square={
     height:15,
     speed: 7,
     moving : 0, // 0 = no move, 1 = left, 2 = right
+    colors : ['#fc03a5','#9e3e7c', '#d18cb9','#a68a9f', '#876175','#91497e'],
+    currentColor : 'black',
 
     init(game){
         this.game = game;
@@ -20,8 +22,15 @@ const square={
     draw(){
         this.game.ctx.beginPath();
         this.game.ctx.rect(this.x, this.y, this.width, this.height);
+        this.game.ctx.fillStyle = this.currentColor;
         this.game.ctx.fill();
+        this.game.ctx.fillStyle = 'black';
         this.game.ctx.closePath();
+    },
+    changeColor() {
+        let colorWithoutCurrent = [...this.colors];
+        colorWithoutCurrent.splice(colorWithoutCurrent.indexOf(this.currentColor), 1);
+        this.currentColor = colorWithoutCurrent[Math.floor(Math.random()*colorWithoutCurrent.length)];
     },
     goRight(){
         if (this.x + this.width > this.game.canvas.width ){
@@ -52,9 +61,9 @@ const square={
     },
     isCollisionned(ball){
         if(ball.y+ball.height > this.y
-            && ball.y+ball.height < this.y + this.height
-            && ball.x > this.x
-            && ball.x < this.x +this.width){
+            && ball.y + ball.height < this.y + this.height
+            && ball.x + ball.width > this.x
+            && ball.x - ball.width <= this.x +this.width){
 
             ball.speed = -ball.speed;
             if (this.moving === 1 ){
@@ -65,6 +74,7 @@ const square={
                 ball.direction -= 2.5;
 
             }
+            this.changeColor();
         }
 
     }

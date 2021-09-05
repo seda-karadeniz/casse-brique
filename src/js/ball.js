@@ -8,6 +8,8 @@ const ball = {
     width : 7,
     speed : 2,
     direction : 0,
+    colors : ['#fc03a5','#9e3e7c', '#d18cb9','#a68a9f', '#876175','#91497e'],
+    currentColor : 'black',
 
     init(game){
         this.game = game;
@@ -28,11 +30,16 @@ const ball = {
         this.game.ctx.beginPath();
 
         this.game.ctx.ellipse(this.x, this.y, this.width, this.height, 0, 0, Math.PI * 2/*tout le cercle math.pi = demi cercle *2 = entier*/, false);
-        this.game.ctx.fillStyle = "grey";
+        this.game.ctx.fillStyle = this.currentColor;
         this.game.ctx.fill();
-        this.game.ctx.fillStyle = "black";
-
+        this.game.ctx.fillStyle = 'black';
         this.game.ctx.closePath();
+    },
+    changeColor(){
+        let colorsWithoutCurrent = [...this.colors];
+        colorsWithoutCurrent.splice(colorsWithoutCurrent.indexOf(this.currentColor), 1);
+        this.currentColor = colorsWithoutCurrent[Math.floor(Math.random()*colorsWithoutCurrent.length)];
+
     },
     collisions(){
         this.bottomCollision();

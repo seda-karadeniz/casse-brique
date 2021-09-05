@@ -20,14 +20,16 @@ export default class Ennemie {
         this.game.ctx.closePath();
     }
     isCollisionned(ball) {
-        if (ball.y > this.y
-            && ball.y - ball.height < this.y + this.height
-            && ball.x > this.x
-            && ball.x < this.x + this.width) {
+        if (ball.y + ball.height >= this.y
+            && ball.y - ball.height <= this.y + this.height
+            && ball.x - ball.width >= this.x
+            && ball.x+ball.width <= this.x + this.width) {
 
             ball.speed = -ball.speed;
             delete this.x;
             delete this.y;
+            ball.changeColor();
+
         }
     }
 

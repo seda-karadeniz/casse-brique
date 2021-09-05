@@ -41,6 +41,7 @@ const game= {
     init(){
 
         this.ctx = this.canvas.getContext('2d');
+
         this.p = document.createElement('p');
         this.p.textContent ='appuyez sur la touche espace pour débuter le jeu';
         document.body.appendChild(this.p);
@@ -49,11 +50,9 @@ const game= {
         this.pColor.textContent = 'Vous pouvez switcher entre deux couleur en appuyant sur la touche D'
         this.p.insertAdjacentElement('afterend',this.pColor);
         this.pColor.style.textAlign = 'center';
+
         controller.init(this);
-
         square.init(this);
-
-
         for (let i = 1; i < this.ennemiesCount; i++){
 
             this.ennemies.push(new Ennemie(this, this.initialEnnemieX, this.initialEnnemieY));
